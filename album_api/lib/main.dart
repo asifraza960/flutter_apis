@@ -15,9 +15,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Future<List<Album>>? _futureAlbums;
     AlbumServices _apiService = AlbumServices();
-
-   
-
     return Scaffold(
       appBar: AppBar(
         title: Text("AlbumAPi"),
@@ -30,7 +27,6 @@ class MyApp extends StatelessWidget {
         if(snapshot.connectionState == ConnectionState.none){
           return Center(
             child: ElevatedButton(onPressed: (){
-          
             }, child: Text("loading....")
             )
           );

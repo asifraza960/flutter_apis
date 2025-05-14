@@ -1,6 +1,5 @@
 
 import 'package:album_api/album_model.dart';
-import 'package:album_api/album_services.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,12 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<List<Album>>? _futureAlbums;
-    AlbumServices _apiService = AlbumServices();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("AlbumAPi"),
         centerTitle: true,
-      
       ),
       body: FutureBuilder(
         future: _futureAlbums, 
@@ -35,9 +33,21 @@ class MyApp extends StatelessWidget {
           );
         }
       else {
-        return Center(child: Text("Somthing went wronng"),);
+       if(snapshot.hasData){
+
+      final album = snapshot.data;
+      return ListView.builder (
+        itemCount: album?.length,
+        itemBuilder: (context,index)=> ListTile(
+          title: Text(album![index].id.toString()),
+          subtitle: Text(album![index].userId.toString()),
+          
+        )
+        ,);
+       }else{
+        return Text("something went wromg");
+       }
       }
-     
       }
     ),
     floatingActionButton: FloatingActionButton(
